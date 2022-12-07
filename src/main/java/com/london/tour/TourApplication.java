@@ -1,13 +1,13 @@
-package com.tour.london;
+package com.london.tour;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LondonApplication {
+public class TourApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LondonApplication.class, args);
+		SpringApplication.run(TourApplication.class, args);
 	}
 
 }
