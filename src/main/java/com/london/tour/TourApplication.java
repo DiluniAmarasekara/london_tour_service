@@ -93,7 +93,8 @@ public class TourApplication implements CommandLineRunner {
             System.out.println("Attraction Type: " + attractionType.name());
             System.out.println("Attraction Id, Attraction Name, Entrance Price, Opening Hour, Closing Hour");
             attractions.forEach(attraction -> {
-                System.out.println(attraction.getAttractionId() + " >>>> " + attraction.getAttractionName() + " >>>> " + attraction.getPrice() + " >>>> " + attraction.getOpeningHours() + " >>>> " + attraction.getClosingHours());
+                System.out.println(attraction.getAttractionId() + " >>>> " + attraction.getAttractionName() + " >>>> " + attraction.getPrice() + " >>>> " +
+                        attraction.getOpeningHours() + " >>>> " + attraction.getClosingHours());
             });
         });
     }
