@@ -15,4 +15,9 @@ public class Park extends Attraction {
         this.price = 0.0;
         this.attractionType = AttractionType.PARK;
     }
+
+    @Override
+    public void setPrice(Double price) {
+        super.setPrice(0.0);
+    }
 }
