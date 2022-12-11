@@ -4,8 +4,6 @@ import com.london.tour.entity.Attraction;
 import com.london.tour.entity.Museum;
 import com.london.tour.entity.Park;
 import com.london.tour.entity.Theatre;
-import com.london.tour.service.AttractionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
@@ -48,8 +46,11 @@ public class InputConfig {
         String open = sc.next().replace(":", "");
         System.out.println("Enter the Closing Hours (HH:mm) >>>>");
         String close = sc.next().replace(":", "");
-        System.out.println("Enter the Price Per Person in pounds (£, GBP) >>>>");
-        String price = sc.next();
+        String price = "0";
+        if (!type.equals(1)) {
+            System.out.println("Enter the Price Per Person in pounds (£, GBP) >>>>");
+            price = sc.next();
+        }
 
         Attraction newAttraction = type.equals(1) ? new Park(name, Integer.parseInt(open), Integer.parseInt(close)) :
                 type.equals(2) ? new Museum(name, Integer.parseInt(open), Integer.parseInt(close), Double.valueOf(price)) :
@@ -77,9 +78,9 @@ public class InputConfig {
         String name = sc.next();
         System.out.println("Enter the new Opening Hours (HH:mm) (type - if not going to change) >>>>");
         String open = !sc.next().equals("-") ? sc.next().replace(":", "") : "-";
-        System.out.println("Enter the Closing Hours (HH:mm) (type - if not going to change) >>>>");
+        System.out.println("Enter the new Closing Hours (HH:mm) (type - if not going to change) >>>>");
         String close = !sc.next().equals("-") ? sc.next().replace(":", "") : "-";
-        System.out.println("Enter the Price Per Person in pounds (£, GBP) (type - if not going to change) >>>>");
+        System.out.println("Enter the new Price Per Person in pounds (£, GBP) (type - if not going to change) >>>>");
         String price = sc.next();
 
         Attraction attraction = new Attraction(Integer.parseInt(id), name, !open.equals("-") ? Integer.parseInt(open) : null,

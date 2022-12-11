@@ -49,6 +49,14 @@ public class Attraction implements Serializable {
         this.price = price;
     }
 
+    public Attraction(String attractionName, AttractionType attractionType, Integer openingHours, Integer closingHours, Double price) {
+        this.attractionName = attractionName;
+        this.attractionType = attractionType;
+        this.openingHours = openingHours;
+        this.closingHours = closingHours;
+        this.price = price;
+    }
+
     public Integer getAttractionId() {
         return attractionId;
     }

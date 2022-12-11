@@ -22,7 +22,9 @@ public class AttractionServiceImpl implements AttractionService {
     @Override
     @Transactional
     public Boolean createAttraction(Attraction attraction) {
-        attractionRepository.saveAndFlush(attraction);
+        Attraction newAttraction = new Attraction(attraction.getAttractionName(), attraction.getAttractionType(),
+                attraction.getOpeningHours(), attraction.getClosingHours(), attraction.getPrice());
+        attractionRepository.saveAndFlush(newAttraction);
         return Boolean.TRUE;
     }
 

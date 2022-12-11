@@ -3,12 +3,16 @@ package com.london.tour;
 import com.london.tour.config.InputConfig;
 import com.london.tour.entity.Attraction;
 import com.london.tour.service.AttractionService;
+import com.london.tour.util.AttractionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.groupingBy;
 
 @SpringBootApplication
 public class TourApplication implements CommandLineRunner {
@@ -73,9 +77,9 @@ public class TourApplication implements CommandLineRunner {
 
     private void printAllAttractions() {
         List<Attraction> attractionList = attractionService.viewAttractions();
-        System.out.println("Attraction Id, Attraction Name, Entrance Price, Opening Hour, Closing Hour");
+        System.out.println("Attraction Id, Attraction Type, Attraction Name, Entrance Price, Opening Hour, Closing Hour");
         attractionList.forEach(attraction -> {
-            System.out.println(attraction.getAttractionId() + " >>>> " + attraction.getAttractionName() + " >>>> " + attraction.getPrice() + " >>>> " + attraction.getOpeningHours() + " >>>> " + attraction.getClosingHours());
+            System.out.println(attraction.getAttractionId() + " >>>> " + attraction.getAttractionType().name() + " >>>> " + attraction.getAttractionName() + " >>>> " + attraction.getPrice() + " >>>> " + attraction.getOpeningHours() + " >>>> " + attraction.getClosingHours());
         });
     }
 
@@ -83,9 +87,14 @@ public class TourApplication implements CommandLineRunner {
         System.out.println("*****************************************************");
         System.out.println("Attractions which open after 7PM and price less than 5£");
         List<Attraction> attractionList = attractionService.viewFilteredAttractions();
-        System.out.println("Attraction Id, Attraction Name, Entrance Price, Opening Hour, Closing Hour");
-        attractionList.forEach(attraction -> {
-            System.out.println(attraction.getAttractionId() + " >>>> " + attraction.getAttractionName() + " >>>> " + attraction.getPrice() + " >>>> " + attraction.getOpeningHours() + " >>>> " + attraction.getClosingHours());
+        Map<AttractionType, List<Attraction>> attractionMap = attractionList.stream().collect(groupingBy(Attraction::getAttractionType));
+        attractionMap.forEach((attractionType, attractions) -> {
+            System.out.println("*****************************************************");
+            System.out.println("Attraction Type: " + attractionType.name());
+            System.out.println("Attraction Id, Attraction Name, Entrance Price, Opening Hour, Closing Hour");
+            attractions.forEach(attraction -> {
+                System.out.println(attraction.getAttractionId() + " >>>> " + attraction.getAttractionName() + " >>>> " + attraction.getPrice() + " >>>> " + attraction.getOpeningHours() + " >>>> " + attraction.getClosingHours());
+            });
         });
     }
 }
