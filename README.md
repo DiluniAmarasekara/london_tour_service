@@ -41,8 +41,4 @@ cd target
 java -jar tour-0.0.1-SNAPSHOT.jar
 ```
 
-## Screenshots
-
-> You can find [_Test screenshots here_](img/screenshots)
-
 ----------
