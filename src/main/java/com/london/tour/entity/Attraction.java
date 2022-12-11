@@ -3,7 +3,6 @@ import com.london.tour.util.AttractionType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * created by Diluni
