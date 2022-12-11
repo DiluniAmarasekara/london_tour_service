@@ -1,0 +1,39 @@
+package com.london.tour.service.impl;
+
+import com.london.tour.entity.attraction.Attraction;
+import com.london.tour.repository.AttractionRepository;
+import com.london.tour.service.AttractionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * created by Diluni
+ * on 11/28/2022
+ */
+@Service
+public class AttractionServiceImpl implements AttractionService {
+    @Autowired
+    private AttractionRepository attractionRepository;
+
+    @Override
+    @Transactional
+    public Boolean createAttraction(Attraction attraction) {
+        attractionRepository.saveAndFlush(attraction);
+        return Boolean.TRUE;
+    }
+
+    @Override
+    public List<Attraction> viewAttractions() {
+        return attractionRepository.findAll();
+    }
+
+    @Override
+    public Attraction findByAttractionId(Integer attractionId) {
+        Optional<Attraction> attraction = attractionRepository.findById(attractionId);
+        return attraction.get();
+    }
+}

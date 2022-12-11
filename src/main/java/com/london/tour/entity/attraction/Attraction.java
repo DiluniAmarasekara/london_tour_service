@@ -31,7 +31,7 @@ public class Attraction implements Serializable {
      * Many-to-many relationship
      */
     @ManyToMany(mappedBy = "assignedAttractions")
-    protected Set<Tour> assignedTours = null;
+    private Set<Tour> assignedTours = null;
 
     public Attraction() {
     }
@@ -47,6 +47,14 @@ public class Attraction implements Serializable {
         this.openingHours = openingHours;
         this.closingHours = closingHours;
         this.price = price;
+    }
+
+    public Integer getAttractionId() {
+        return attractionId;
+    }
+
+    public void setAttractionId(Integer attractionId) {
+        this.attractionId = attractionId;
     }
 
     public String getAttractionName() {
