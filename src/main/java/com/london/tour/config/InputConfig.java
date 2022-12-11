@@ -20,10 +20,6 @@ public class InputConfig {
      * This class allows user inputs and displays all the command line interface
      * System.out.println line blocks
      */
-
-    @Autowired
-    private AttractionService attractionService;
-
     private Scanner sc = new Scanner(System.in);
 
     public Integer displayMainMenu() {

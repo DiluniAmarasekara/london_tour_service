@@ -12,5 +12,5 @@ import java.util.List;
  */
 @Repository
 public interface AttractionRepository extends JpaRepository<Attraction, Integer> {
-    List<Attraction> findAllByOpeningHoursGreaterThanAndPriceLessThan(Integer openingHours, Double price);
+    List<Attraction> findAllByOpeningHoursGreaterThanEqualAndPriceLessThan(Integer openingHours, Double price);
 }

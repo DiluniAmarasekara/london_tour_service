@@ -65,7 +65,7 @@ public class AttractionServiceImpl implements AttractionService {
 
     @Override
     public List<Attraction> viewFilteredAttractions() {
-        List<Attraction> attractions = attractionRepository.findAllByOpeningHoursGreaterThanAndPriceLessThan(1900, 5.00);
+        List<Attraction> attractions = attractionRepository.findAllByOpeningHoursGreaterThanEqualAndPriceLessThan(1900, 5.00);
         return attractions;
     }
 }

@@ -88,5 +88,4 @@ public class TourApplication implements CommandLineRunner {
             System.out.println(attraction.getAttractionId() + " >>>> " + attraction.getAttractionName() + " >>>> " + attraction.getPrice() + " >>>> " + attraction.getOpeningHours() + " >>>> " + attraction.getClosingHours());
         });
     }
-
 }
