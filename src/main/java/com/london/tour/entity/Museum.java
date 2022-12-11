@@ -1,4 +1,4 @@
-package com.london.tour.entity.attraction;
+package com.london.tour.entity;
 
 import com.london.tour.util.AttractionType;
 

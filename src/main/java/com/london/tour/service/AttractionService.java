@@ -1,6 +1,6 @@
 package com.london.tour.service;
 
-import com.london.tour.entity.attraction.Attraction;
+import com.london.tour.entity.Attraction;
 
 import java.util.List;
 
@@ -13,5 +13,9 @@ public interface AttractionService {
 
     List<Attraction> viewAttractions();
 
-    Attraction findByAttractionId(Integer attractionId);
+    Boolean updateAttraction(Attraction attraction);
+
+    Boolean deleteAttraction(Integer attractionId);
+
+    List<Attraction> viewFilteredAttractions();
 }

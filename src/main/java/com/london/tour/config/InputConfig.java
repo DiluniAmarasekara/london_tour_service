@@ -1,18 +1,14 @@
 package com.london.tour.config;
 
-import com.london.tour.entity.Tour;
-import com.london.tour.entity.attraction.Attraction;
-import com.london.tour.entity.attraction.Museum;
-import com.london.tour.entity.attraction.Park;
-import com.london.tour.entity.attraction.Theatre;
+import com.london.tour.entity.Attraction;
+import com.london.tour.entity.Museum;
+import com.london.tour.entity.Park;
+import com.london.tour.entity.Theatre;
 import com.london.tour.service.AttractionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * created by Diluni
@@ -40,16 +36,13 @@ public class InputConfig {
         System.out.println("Enter 2 to Update An Attraction");
         System.out.println("Enter 3 to Print The List Of Attractions");
         System.out.println("Enter 4 to Delete An Attraction");
-        System.out.println("Enter 5 to Print The List Of Tours");
-        System.out.println("Enter 6 to Delete A Tour");
+        System.out.println("Enter 5 to Print The Price");
         System.out.println("Enter 0 to Exit");
         System.out.println("*****************************************************");
         System.out.println("\n****************** User Functions ******************");
         System.out.println("Select your choice: ");
         System.out.println("Enter 3 to Print The List Of Attractions");
-        System.out.println("Enter 7 to Add A Tour");
-        System.out.println("Enter 8 to Update A Tour");
-        System.out.println("Enter 5 to Print The List Of Tours");
+        System.out.println("Enter 5 to Print The Price");
         System.out.println("Enter 0 to Exit");
         System.out.println("*****************************************************");
         System.out.println("\nEnter your choice here >>>>");
@@ -57,16 +50,16 @@ public class InputConfig {
         return sc.nextInt();
     }
 
-    public Attraction createAttraction() {
+    public Attraction inputCreateObj() {
         Integer type = displayAttractionSelect();
         System.out.println("*****************************************************");
         System.out.println("Enter the Name >>>>");
         String name = sc.next();
-        System.out.println("Enter the Opening Hours >>>>");
-        String open = sc.next();
-        System.out.println("Enter the Closing Hours >>>>");
-        String close = sc.next();
-        System.out.println("Enter the Price Per Person >>>>");
+        System.out.println("Enter the Opening Hours (HH:mm) >>>>");
+        String open = sc.next().replace(":", "");
+        System.out.println("Enter the Closing Hours (HH:mm) >>>>");
+        String close = sc.next().replace(":", "");
+        System.out.println("Enter the Price Per Person in pounds (£, GBP) >>>>");
         String price = sc.next();
 
         Attraction newAttraction = type.equals(1) ? new Park(name, Integer.parseInt(open), Integer.parseInt(close)) :
@@ -87,25 +80,27 @@ public class InputConfig {
         return sc.nextInt();
     }
 
-    public Tour createTour() {
+    public Attraction inputUpdateObj() {
         System.out.println("*****************************************************");
-        System.out.println("Enter the Date Of Tour (yyyy/mm/dd) >>>> ");
-        String tempDate = sc.next();
-        System.out.println("Enter the Number Of People >>>>");
-        Integer noOfPeople = sc.nextInt();
-        Tour newTour = new Tour(tempDate, noOfPeople);
+        System.out.println("Enter the Attraction ID >>>>");
+        String id = sc.next();
+        System.out.println("Enter the new Attraction Name (type - if not going to change) >>>>");
+        String name = sc.next();
+        System.out.println("Enter the new Opening Hours (HH:mm) (type - if not going to change) >>>>");
+        String open = !sc.next().equals("-") ? sc.next().replace(":", "") : "-";
+        System.out.println("Enter the Closing Hours (HH:mm) (type - if not going to change) >>>>");
+        String close = !sc.next().equals("-") ? sc.next().replace(":", "") : "-";
+        System.out.println("Enter the Price Per Person in pounds (£, GBP) (type - if not going to change) >>>>");
+        String price = sc.next();
 
-        return setAttractions(newTour);
+        Attraction attraction = new Attraction(Integer.parseInt(id), name, !open.equals("-") ? Integer.parseInt(open) : null,
+                !close.equals("-") ? Integer.parseInt(close) : null, !price.equals("-") ? Double.valueOf(price) : null);
+        return attraction;
     }
 
-    public Tour setAttractions(Tour tour) {
-        System.out.println("Select the places you wish to visit: \n");
-
-        List<Attraction> attractions = attractionService.viewAttractions();
-        System.out.println("Attraction Id, Attraction Name, Entrance Price, Opening Hour, Closing Hour");
-        attractions.forEach(attraction -> {
-            System.out.println(attraction.getAttractionId() + " >>>> " + attraction.getAttractionName() + " >>>> " + attraction.getPrice() + " >>>> " + attraction.getOpeningHours() + " >>>> " + attraction.getClosingHours());
-        });
-        return tour;
+    public Integer inputDeleteObjId() {
+        System.out.println("*****************************************************");
+        System.out.println("Enter the Attraction ID >>>>");
+        return sc.nextInt();
     }
 }

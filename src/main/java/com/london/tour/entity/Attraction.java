@@ -1,5 +1,4 @@
-package com.london.tour.entity.attraction;
-import com.london.tour.entity.Tour;
+package com.london.tour.entity;
 import com.london.tour.util.AttractionType;
 
 import javax.persistence.*;
@@ -27,13 +26,15 @@ public class Attraction implements Serializable {
 
     protected Double price;
 
-    /**
-     * Many-to-many relationship
-     */
-    @ManyToMany(mappedBy = "assignedAttractions")
-    private Set<Tour> assignedTours = null;
-
     public Attraction() {
+    }
+
+    public Attraction(Integer attractionId, String attractionName, Integer openingHours, Integer closingHours, Double price) {
+        this.attractionId = attractionId;
+        this.attractionName = attractionName;
+        this.openingHours = openingHours;
+        this.closingHours = closingHours;
+        this.price = price;
     }
 
     public Attraction(String attractionName, Integer openingHours, Integer closingHours) {
@@ -97,11 +98,4 @@ public class Attraction implements Serializable {
         this.price = price;
     }
 
-    public Set<Tour> getAssignedTours() {
-        return assignedTours;
-    }
-
-    public void setAssignedTours(Set<Tour> assignedTours) {
-        this.assignedTours = assignedTours;
-    }
 }

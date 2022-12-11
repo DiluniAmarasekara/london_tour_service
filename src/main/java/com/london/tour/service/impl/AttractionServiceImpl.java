@@ -1,6 +1,6 @@
 package com.london.tour.service.impl;
 
-import com.london.tour.entity.attraction.Attraction;
+import com.london.tour.entity.Attraction;
 import com.london.tour.repository.AttractionRepository;
 import com.london.tour.service.AttractionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +32,40 @@ public class AttractionServiceImpl implements AttractionService {
     }
 
     @Override
-    public Attraction findByAttractionId(Integer attractionId) {
-        Optional<Attraction> attraction = attractionRepository.findById(attractionId);
-        return attraction.get();
+    @Transactional
+    public Boolean updateAttraction(Attraction attraction) {
+        Optional<Attraction> attractionObj = attractionRepository.findById(attraction.getAttractionId());
+        if (attractionObj.isPresent()) {
+            if (attraction.getAttractionName() != null) {
+                attractionObj.get().setAttractionName(attraction.getAttractionName());
+            }
+            if (attraction.getOpeningHours() != null) {
+                attractionObj.get().setOpeningHours(attraction.getOpeningHours());
+            }
+            if (attraction.getClosingHours() != null) {
+                attractionObj.get().setClosingHours(attraction.getClosingHours());
+            }
+            if (attraction.getPrice() != null) {
+                attractionObj.get().setPrice(attraction.getPrice());
+            }
+            attractionRepository.saveAndFlush(attractionObj.get());
+            return true;
+        } else return false;
+    }
+
+    @Override
+    @Transactional
+    public Boolean deleteAttraction(Integer attractionId) {
+        Optional<Attraction> attractionObj = attractionRepository.findById(attractionId);
+        if (attractionObj.isPresent()) {
+            attractionRepository.delete(attractionObj.get());
+            return true;
+        } else return false;
+    }
+
+    @Override
+    public List<Attraction> viewFilteredAttractions() {
+        List<Attraction> attractions = attractionRepository.findAllByOpeningHoursGreaterThanAndPriceLessThan(1900, 5.00);
+        return attractions;
     }
 }
