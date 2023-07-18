@@ -1,5 +1,5 @@
 # london_tour_service
-Advanced Software Designs Course Work 1
+Advanced Software Designs
 
 ## Technologies
 - Apache Maven 3.8.6
